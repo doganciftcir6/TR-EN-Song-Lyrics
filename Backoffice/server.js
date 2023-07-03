@@ -1,13 +1,20 @@
 const express = require("express");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+
 
 const app = express();
 
-const port = 5000;
+//env kullan
+dotenv.config();
+//db baglan
+mongoose.connect(process.env.DB_CONNECTION_STRING)
+    .then(() => {
+        app.listen(process.env.PORT, () => {
+            console.log(`${process.env.PORT} Portlu Server Ayaga Kalkmis Durumda ve DB Baglantisi Basirili...`);
+        });
+    }).catch((err) => console.log(err));
 
-app.get("/", (req,res) => {
-    res.send("Selamlar");
-});
+//routes
 
-app.listen(port, () => {
-    console.log(`${port} Portlu Server Ayaga Kalkmis Durumda...`);
-});
+
