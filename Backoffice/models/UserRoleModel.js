@@ -5,10 +5,12 @@ const userRoleSchema = mongoose.Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",
+    required: [true, "You must enter an user!"]
   },
   role: {
     type: Schema.Types.ObjectId,
     ref: "Role",
+    required: [true, "You must enter an role!"]
   }
 }, { unique: true });
 

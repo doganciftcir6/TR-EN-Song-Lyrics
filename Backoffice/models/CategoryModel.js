@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const categorySchema = mongoose.Schema({
   category_name: {
     type: String,
-    require: [true, "You must enter an category name!"],
+    required: [true, "You must enter an category name!"],
     minlength: [
       5,
       "The category name field must have a minimum of 5 characters!",
