@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 //ek validation ayarlamaları kullanmak için validator paketi.
 const { isEmail, isMobilePhone, isStrongPassword } = require("validator");
 
+//timestamps: true ile kayıdın oluşturulma tarihini tut.
 const userSchema = mongoose.Schema({
   firstname: {
     type: String,
@@ -68,7 +69,7 @@ const userSchema = mongoose.Schema({
     ref: "Gender",
     required: [true, "You must select a gender"]
   },
-});
+}, { timestamps: true });
 
 const User = mongoose.model("Users", userSchema);
 module.exports = User;

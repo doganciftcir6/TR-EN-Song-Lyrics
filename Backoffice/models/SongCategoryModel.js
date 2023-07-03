@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const songCategorySchema = mongoose.Schema(
   {
-    //song ve category 'in çoka çok ilişkisi, unique: true ile tekrarlı kayıt olma ihtimalini engelle.
+    //song ve category 'in çoka çok ilişkisi, unique: true ile tekrarlı kayıt olma ihtimalini engelle. timestamps: true ile oluşturma tarini tut.
     song: {
       type: Schema.Types.ObjectId,
       ref: "Song",
@@ -14,6 +14,7 @@ const songCategorySchema = mongoose.Schema(
       required: [true, "You must enter an category!"],
     },
   },
+  { timestamps: true },
   { unique: true }
 );
 

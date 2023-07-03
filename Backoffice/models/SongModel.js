@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+//timestamps: true ile kayıdın oluşturulma tarihini tut.
 const songSchema = mongoose.Schema({
   title: {
     type: String,
@@ -33,17 +34,18 @@ const songSchema = mongoose.Schema({
     type: String,
     required: [true, "You must enter an release date!"],
     validate: {
-      validator: function(value) {
+      validator: function (value) {
         // "YYYY" formatına uygunluğu kontrol etme
         return /^\d{4}$/.test(value);
       },
-      message: props => `${props.value} Invalid release date format. Please enter the date in the "YYYY" format!`
-    }
+      message: (props) =>
+        `${props.value} Invalid release date format. Please enter the date in the "YYYY" format!`,
+    },
   },
   status: {
-    type: Boolean
-  }
-});
+    type: Boolean,
+  },
+}, { timestamps: true });
 
 const Song = mongoose.model("Songs", songSchema);
 module.exports = Song;
