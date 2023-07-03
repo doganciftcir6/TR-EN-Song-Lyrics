@@ -1,11 +1,13 @@
 const mongoose = require("mongoose");
+//ek validation ayarlamaları kullanmak için validator paketi.
 const { isEmail, isMobilePhone, isStrongPassword } = require("validator");
 
 const userSchema = mongoose.Schema({
   firstname: {
     type: String,
     require: [true, "You must enter an firstname!"],
-    minlength: [3, "You must enter at least 3 characters for the name field!"],
+    minlength: [3, "You must enter at least 3 characters for the firstname field!"],
+    maxlength: [15, "The firstname field must have a maximum of 15 characters!"],
   },
   lastname: {
     type: String,
@@ -14,6 +16,7 @@ const userSchema = mongoose.Schema({
       3,
       "You must enter at least 3 characters for the last name field!",
     ],
+    maxlength: [15, "The lastname field must have a maximum of 15 characters!"],
   },
   phone_number: {
     type: String,
