@@ -67,7 +67,7 @@ const userSchema = mongoose.Schema({
   gender: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Gender",
-    required: [true, "You must select a gender"]
+    required: [true, "You must select a gender!"]
   },
 }, { timestamps: true });
 
