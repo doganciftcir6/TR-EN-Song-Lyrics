@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+//timestamps: true ile kayıdın oluşturulma tarihini tut.
 const artistSchema = mongoose.Schema({
   artist_name: {
     type: String,
@@ -29,7 +30,7 @@ const artistSchema = mongoose.Schema({
   status: {
     type: Boolean
   }
-});
+}, { timestamps: true });
 
 const Artist = mongoose.model("Artists", artistSchema);
 module.exports = Artist;
