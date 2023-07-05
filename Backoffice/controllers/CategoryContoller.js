@@ -1,5 +1,4 @@
 const Category = require("../models/CategoryModel");
-const mongoose = require("mongoose");
 const CheckIsValidMongoID = require("../Helpers/FindHelpers/FindIDHelper");
 
 //!GetAll
@@ -18,7 +17,7 @@ module.exports.GetByIdCategories = async (req, res) => {
   //id urlden gelecek
   const categoryId = req.params.id;
   //verilen id mongoose'un varsayılan id özelliklerine göre (ObjectId'ye göre) geçerlimi veya var mı (helpera alındı)
-  const isValidId = await CheckIsValidMongoID(categoryId);
+  const isValidId = CheckIsValidMongoID(categoryId);
   if(!isValidId){
     return res.status(400).json("Invalid category ID!!");
   }
@@ -57,7 +56,7 @@ module.exports.UpdateCategory = async (req, res) => {
   const updatedCategory = req.body;
   //verilen id mongoose'un varsayılan id özelliklerine göre (ObjectId'ye göre) geçerlimi veya var mı
   //BU KOD YAPISINI HELPER METOTA AL TEKRARA DÜŞTÜ!!!!!! (alındı)
-  const isValidId = await CheckIsValidMongoID(updatedCategory.categoryId);
+  const isValidId = CheckIsValidMongoID(updatedCategory.categoryId);
   if(!isValidId){
     return res.status(400).json("Invalid category ID!!");
   }
@@ -86,7 +85,7 @@ module.exports.DeleteCategory = async (req, res) => {
   const categoryId = req.params.id;
   //verilen id mongoose'un varsayılan id özelliklerine göre (ObjectId'ye göre) geçerlimi veya var mı
   //BU KOD YAPISINI HELPER METOTA AL TEKRARA DÜŞTÜ!!!!!! (alındı)
-  const isValidId = CheckIsValidMongoID(categoryId, res);
+  const isValidId = CheckIsValidMongoID(categoryId);
   if(!isValidId){
     return res.status(400).json("Invalid category ID!!");
   }
