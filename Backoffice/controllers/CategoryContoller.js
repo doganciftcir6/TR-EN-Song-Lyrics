@@ -1,5 +1,6 @@
 const Category = require("../models/CategoryModel");
 const mongoose = require("mongoose");
+const CheckIsValidMongoID = require("../Helpers/FindHelpers/FindIDHelper");
 
 //!GetAll
 module.exports.GetAllCategories = async (req, res) => {
@@ -16,8 +17,9 @@ module.exports.GetAllCategories = async (req, res) => {
 module.exports.GetByIdCategories = async (req, res) => {
   //id urlden gelecek
   const categoryId = req.params.id;
-  //verilen id mongoose'un varsayılan id özelliklerine göre (ObjectId'ye göre) geçerlimi veya var mı
-  if (!categoryId || !mongoose.Types.ObjectId.isValid(categoryId)) {
+  //verilen id mongoose'un varsayılan id özelliklerine göre (ObjectId'ye göre) geçerlimi veya var mı (helpera alındı)
+  const isValidId = await CheckIsValidMongoID(categoryId);
+  if(!isValidId){
     return res.status(400).json("Invalid category ID!!");
   }
 
@@ -54,16 +56,14 @@ module.exports.UpdateCategory = async (req, res) => {
   //id bu sefer bodyden gelecek
   const updatedCategory = req.body;
   //verilen id mongoose'un varsayılan id özelliklerine göre (ObjectId'ye göre) geçerlimi veya var mı
-  //BU KOD YAPISINI HELPER METOTA AL TEKRARA DÜŞTÜ!!!!!!
-  if (
-    !updatedCategory._id ||
-    !mongoose.Types.ObjectId.isValid(updatedCategory._id)
-  ) {
+  //BU KOD YAPISINI HELPER METOTA AL TEKRARA DÜŞTÜ!!!!!! (alındı)
+  const isValidId = await CheckIsValidMongoID(updatedCategory.categoryId);
+  if(!isValidId){
     return res.status(400).json("Invalid category ID!!");
   }
 
   await Category.findOneAndUpdate(
-    { _id: updatedCategory._id }, // Güncellenecek kategorinin ID'si
+    { _id: updatedCategory.categoryId }, // Güncellenecek kategorinin ID'si
     updatedCategory, // Güncelleme verileri
     { runValidators: true } // validation kontrollerinin yapılması için
   )
@@ -85,8 +85,9 @@ module.exports.DeleteCategory = async (req, res) => {
   //id urlden gelecek
   const categoryId = req.params.id;
   //verilen id mongoose'un varsayılan id özelliklerine göre (ObjectId'ye göre) geçerlimi veya var mı
-  //BU KOD YAPISINI HELPER METOTA AL TEKRARA DÜŞTÜ!!!!!!
-  if (!categoryId || !mongoose.Types.ObjectId.isValid(categoryId)) {
+  //BU KOD YAPISINI HELPER METOTA AL TEKRARA DÜŞTÜ!!!!!! (alındı)
+  const isValidId = CheckIsValidMongoID(categoryId, res);
+  if(!isValidId){
     return res.status(400).json("Invalid category ID!!");
   }
 

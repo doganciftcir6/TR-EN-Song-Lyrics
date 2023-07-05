@@ -7,8 +7,8 @@ const categorySchema = mongoose.Schema(
       type: String,
       required: [true, "You must enter an category name!"],
       minlength: [
-        5,
-        "The category name field must have a minimum of 5 characters!",
+        3,
+        "The category name field must have a minimum of 3 characters!",
       ],
       maxlength: [
         100,
