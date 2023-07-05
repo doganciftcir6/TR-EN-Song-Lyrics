@@ -6,6 +6,7 @@ const ConnectDB = require("./Helpers/DBHelper/ConnectMongoDB");
 const categoryRoutes = require("./routes/CategoryRoutes");
 const songRoutes = require("./routes/SongRoutes");
 const genderRoutes = require("./routes/GenderRoutes");
+const roleRotues = require("./routes/RoleRoutes");
 
 
 const app = express();
@@ -26,4 +27,5 @@ app.use(cors());
 app.use("/api/categories", categoryRoutes);
 app.use("/api/songs", songRoutes);
 app.use("/api/genders", genderRoutes);
+app.use("/api/roles", roleRotues);
 
