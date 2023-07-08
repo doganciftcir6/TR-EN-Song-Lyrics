@@ -5,6 +5,7 @@ const CheckIsValidMongoID = require("../Helpers/FindHelpers/FindIDHelper");
 //!GetAll
 module.exports.GetAllUsers = async (req, res) => {
   await User.find()
+    .populate("gender", "definition") // gender alanının verilerini çek, ama sadece id ve definiton bilgisi gelsin.
     .then((users) => {
       res.status(200).json(users);
     })
@@ -24,6 +25,7 @@ module.exports.GetByIdUser = async (req, res) => {
   }
 
   await User.findById(userId)
+    .populate("gender", "definition") // gender alanının verilerini çek, ama sadece id ve definiton bilgisi gelsin.
     .then((user) => {
       if (!user) {
         return res.status(404).json("User not found!");
@@ -45,7 +47,7 @@ module.exports.InsertUser = async (req, res) => {
     return res.status(400).json("Invalid Gender ID!");
   }
 
-  const newUser = new User(req.body);
+  const newUser = new User({ ...req.body, gender: genderId });
   newUser
     .save()
     .then(() => {
@@ -75,7 +77,7 @@ module.exports.UpdateUser = async (req, res) => {
 
   User.findOneAndUpdate(
     { _id: updatedUser.userId }, // Güncellenecek kategorinin ID'si
-    updatedUser, // Güncelleme verileri
+    {...updatedUser, gender: updatedUser.genderId}, // Güncelleme verileri
     { runValidators: true } // validation kontrollerinin yapılması için
   )
     .then((result) => {
