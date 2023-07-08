@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
 //timestamps: true ile kayıdın oluşturulma tarihini tut.
-const userRoleSchema = mongoose.Schema(
+const userRoleSchema = Schema(
   {
     //user ve role 'un çoka çok ilişkisi, unique: true ile tekrarlı kayıt olma ihtimalini engelle.
     user: {

@@ -9,6 +9,7 @@ const genderRoutes = require("./routes/GenderRoutes");
 const roleRotues = require("./routes/RoleRoutes");
 const songCategoryRoutes = require("./routes/SongCategoryRoutes");
 const userRoutes = require("./routes/UserRoutes");
+const userRoleRoutes = require("./routes/UserRoleRoutes");
 
 
 const app = express();
@@ -32,4 +33,5 @@ app.use("/api/genders", genderRoutes);
 app.use("/api/roles", roleRotues);
 app.use("/api/songcategories", songCategoryRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/userroles", userRoleRoutes);
 

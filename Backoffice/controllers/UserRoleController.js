@@ -6,8 +6,8 @@ const CheckIsValidMongoID = require("../Helpers/FindHelpers/FindIDHelper");
 //!GetAll
 module.exports.GetAllUserRoles = async (req, res) => {
   await UserRole.find()
-    .populate("user", "-__v") // user alanının verilerini çek, __v alanını hariç tut
-    .populate("role", "-__v") // role alanının verilerini çek, __v alanını hariç tut
+    .populate("user", "username") // user alanının verilerini çek, sadece id ve username bilgisi gelsin
+    .populate("role", "definition") // role alanının verilerini çek, sadece id ve definition bilgisi gelsin
     .then((userRoles) => {
       res.status(200).json(userRoles);
     })
@@ -27,8 +27,8 @@ module.exports.GetByIdUserRole = async (req, res) => {
   }
 
   await UserRole.findById(userRoleId)
-    .populate("user", "-__v") // user alanının verilerini çek, __v alanını hariç tut
-    .populate("role", "-__v") // role alanının verilerini çek, __v alanını hariç tut
+    .populate("user", "username") // user alanının verilerini çek, sadece id ve username bilgisi gelsin
+    .populate("role", "definition") // role alanının verilerini çek, sadece id ve definition bilgisi gelsin
     .then((userRole) => {
       res.status(200).json(userRole);
     })
@@ -42,8 +42,8 @@ module.exports.InsertUserRole = async (req, res) => {
   const { userId, roleId } = req.body;
 
   // Girilen userId ve roleId'nin geçerli olup olmadığını kontrol et yani bu idli kayıtlar dbde var mı?
-  const isValidUserId = await Category.exists({ _id: userId });
-  const isValidRoleId = await Song.exists({ _id: roleId });
+  const isValidUserId = await User.exists({ _id: userId });
+  const isValidRoleId = await Role.exists({ _id: roleId });
 
   if (!isValidUserId || !isValidRoleId) {
     return res.status(400).json("Invalid user ID or role ID!");
@@ -59,9 +59,7 @@ module.exports.InsertUserRole = async (req, res) => {
     .then(() => {
       res
         .status(200)
-        .json(
-          `${newSongCategory._id} SongCategory with ID successfully added.`
-        );
+        .json(`${newUserRole._id} SongCategory with ID successfully added.`);
     })
     .catch((err) => {
       res.status(500).json(err);
@@ -80,8 +78,8 @@ module.exports.UpdateUserRole = async (req, res) => {
   }
 
   // Girilen userId ve roleId'nin geçerli olup olmadığını kontrol et yani bu idli kayıtlar dbde var mı?
-  const isValidUserId = await Category.exists({ _id: userId });
-  const isValidRoleId = await Song.exists({ _id: roleId });
+  const isValidUserId = await User.exists({ _id: userId });
+  const isValidRoleId = await Role.exists({ _id: roleId });
 
   if (!isValidUserId || !isValidRoleId) {
     return res.status(400).json("Invalid user ID or role ID!");
