@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
-const songCategorySchema = mongoose.Schema(
+const songCategorySchema = Schema(
   {
     //song ve category 'in çoka çok ilişkisi, unique: true ile tekrarlı kayıt olma ihtimalini engelle. timestamps: true ile oluşturma tarini tut.
     song: {
