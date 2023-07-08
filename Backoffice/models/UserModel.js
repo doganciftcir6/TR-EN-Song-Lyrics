@@ -66,7 +66,7 @@ const userSchema = mongoose.Schema({
   //gender ilişkisi
   gender: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Gender",
+    ref: "Genders",
     required: [true, "You must select a gender!"]
   },
 }, { timestamps: true });

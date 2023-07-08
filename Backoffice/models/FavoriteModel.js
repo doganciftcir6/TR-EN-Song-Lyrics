@@ -5,12 +5,12 @@ const favoriteSchema = mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: "Users",
       required: [true, "You must select a user!"],
     },
     song: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Song",
+      ref: "Songs",
       required: [true, "You must select a song!"],
     },
   },

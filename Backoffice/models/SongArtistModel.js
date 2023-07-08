@@ -6,12 +6,12 @@ const songArtistSchema = mongoose.Schema(
   {
     song: {
       type: Schema.Types.ObjectId,
-      ref: "Song",
+      ref: "Songs",
       required: [true, "You must enter an song!"],
     },
     role: {
       type: Schema.Types.ObjectId,
-      ref: "Artist",
+      ref: "Artists",
       required: [true, "You must enter an artist!"],
     },
   },
