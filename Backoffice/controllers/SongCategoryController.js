@@ -90,7 +90,7 @@ module.exports.UpdateSongCategory = async (req, res) => {
     return res.status(400).json("Invalid category ID or song ID!");
   }
 
-  SongCategory.findOneAndUpdate(
+  await SongCategory.findOneAndUpdate(
     { _id: songCategoryId }, // Güncellenecek kategorinin ID'si
     { category: categoryId, song: songId }, // Güncelleme verileri
     { runValidators: true } // validation kontrollerinin yapılması için
