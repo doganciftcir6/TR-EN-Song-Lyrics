@@ -44,7 +44,7 @@ module.exports.GetByIdFavorite = async (req, res) => {
 module.exports.InsertFavorite = async (req, res) => {
   const { userId, songId } = req.body;
 
-  // Girilen userId ve roleId'nin geçerli olup olmadığını kontrol et yani bu idli kayıtlar dbde var mı?
+  // Girilen userId ve songId'nin geçerli olup olmadığını kontrol et yani bu idli kayıtlar dbde var mı?
   const isValidUserId = await User.exists({ _id: userId });
   const isValidSongId = await Song.exists({ _id: songId });
 
@@ -79,7 +79,7 @@ module.exports.UpdateFavorite = async (req, res) => {
     return res.status(400).json("Invalid favorite ID!!");
   }
 
-  // Girilen userId ve roleId'nin geçerli olup olmadığını kontrol et yani bu idli kayıtlar dbde var mı?
+  // Girilen userId ve songId'nin geçerli olup olmadığını kontrol et yani bu idli kayıtlar dbde var mı?
   const isValidUserId = await User.exists({ _id: userId });
   const isValidSongId = await Song.exists({ _id: songId });
 
