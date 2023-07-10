@@ -10,6 +10,7 @@ const roleRotues = require("./routes/RoleRoutes");
 const songCategoryRoutes = require("./routes/SongCategoryRoutes");
 const userRoutes = require("./routes/UserRoutes");
 const userRoleRoutes = require("./routes/UserRoleRoutes");
+const favoriteRoutes = require("./routes/FavoriteRoutes");
 
 
 const app = express();
@@ -34,4 +35,5 @@ app.use("/api/roles", roleRotues);
 app.use("/api/songcategories", songCategoryRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/userroles", userRoleRoutes);
+app.use("/api/favorites", favoriteRoutes);
 

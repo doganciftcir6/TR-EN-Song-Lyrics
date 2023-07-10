@@ -6,6 +6,8 @@ const CheckIsValidMongoID = require("../Helpers/FindHelpers/FindIDHelper");
 //!GetAll
 module.exports.GetAllFavorites = async (req, res) => {
   await Favorite.find()
+    .populate("user", "username") // user alanının verilerini çek, sadece id ve username bilgisi gelsin
+    .populate("song", "title") // song alanının verilerini çek, sadece id ve title bilgisi gelsin
     .then((favorites) => {
       res.status(200).json(favorites);
     })
@@ -25,6 +27,8 @@ module.exports.GetByIdFavorite = async (req, res) => {
   }
 
   await Favorite.findById(favoriteId)
+    .populate("user", "username") // user alanının verilerini çek, sadece id ve username bilgisi gelsin
+    .populate("song", "title") // song alanının verilerini çek, sadece id ve title bilgisi gelsin
     .then((favorite) => {
       if (!favorite) {
         return res.status(404).json("Favorite not found!");
