@@ -24,6 +24,9 @@ module.exports.GetByIdArtist = async (req, res) => {
 
   await Artist.findById(artistId)
     .then((artist) => {
+      if(!artist){
+        return res.status(404).json("Artist not found!");
+      }
       res.status(200).json(artist);
     })
     .catch((err) => {
