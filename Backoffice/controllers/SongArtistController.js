@@ -6,6 +6,8 @@ const CheckIsValidMongoID = require("../Helpers/FindHelpers/FindIDHelper");
 //!GetAll
 module.exports.GetAllSongArtists = async (req, res) => {
   await SongArtist.find()
+    .populate("song", "title") // song alanının verilerini çek, sadece id ve title bilgisi gelsin
+    .populate("artist", "artist_name") // artist alanının verilerini çek, sadece id ve artist_name bilgisi gelsin
     .then((songArtists) => {
       res.status(200).json(songArtists);
     })
@@ -25,6 +27,8 @@ module.exports.GetByIdArtist = async (req, res) => {
   }
 
   await SongArtist.findById(songArtistId)
+    .populate("song", "title") // song alanının verilerini çek, sadece id ve title bilgisi gelsin
+    .populate("artist", "artist_name") // artist alanının verilerini çek, sadece id ve artist_name bilgisi gelsin
     .then((songArtist) => {
       if (!songArtist) {
         return res.status(404).json("SongArtist not found!");
