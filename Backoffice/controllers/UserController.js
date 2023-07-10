@@ -76,7 +76,7 @@ module.exports.UpdateUser = async (req, res) => {
   }
 
   User.findOneAndUpdate(
-    { _id: updatedUser.userId }, // Güncellenecek kategorinin ID'si
+    { _id: updatedUser.userId }, // Güncellenecek Userin ID'si
     {...updatedUser, gender: updatedUser.genderId}, // Güncelleme verileri
     { runValidators: true } // validation kontrollerinin yapılması için
   )

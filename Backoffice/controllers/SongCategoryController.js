@@ -91,7 +91,7 @@ module.exports.UpdateSongCategory = async (req, res) => {
   }
 
   await SongCategory.findOneAndUpdate(
-    { _id: songCategoryId }, // Güncellenecek kategorinin ID'si
+    { _id: songCategoryId }, // Güncellenecek SongCategoryin ID'si
     { category: categoryId, song: songId }, // Güncelleme verileri
     { runValidators: true } // validation kontrollerinin yapılması için
   )

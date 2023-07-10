@@ -61,7 +61,7 @@ module.exports.UpdateGender = async (req, res) => {
   }
 
   await Gender.findOneAndUpdate(
-    { _id: updatedGender.genderId }, // Güncellenecek kategorinin ID'si
+    { _id: updatedGender.genderId }, // Güncellenecek Genderin ID'si
     updatedGender, // Güncelleme verileri
     { runValidators: true } // validation kontrollerinin yapılması için
   )

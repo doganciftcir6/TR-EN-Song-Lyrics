@@ -59,7 +59,7 @@ module.exports.UpdateSong = async (req, res) => {
   }
 
   await Song.findOneAndUpdate(
-    { _id: updatedSong.songId }, // Güncellenecek kategorinin ID'si
+    { _id: updatedSong.songId }, // Güncellenecek Songun ID'si
     updatedSong, // Güncelleme verileri
     { runValidators: true } // validation kontrollerinin yapılması için
   )

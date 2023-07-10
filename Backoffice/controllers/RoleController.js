@@ -59,7 +59,7 @@ module.exports.UpdateRole = async (req, res) => {
   }
 
   await Role.findOneAndUpdate(
-    { _id: updatedRole.roleId }, // Güncellenecek kategorinin ID'si
+    { _id: updatedRole.roleId }, // Güncellenecek Roleun ID'si
     updatedRole, // Güncelleme verileri
     { runValidators: true } // validation kontrollerinin yapılması için
   )
