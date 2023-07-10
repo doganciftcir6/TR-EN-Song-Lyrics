@@ -6,6 +6,8 @@ const CheckIsValidMongoID = require("../Helpers/FindHelpers/FindIDHelper");
 //!GetAll
 module.exports.GetAllComments = async (req, res) => {
   await Comment.find()
+    .populate("user", "username") // user alanının verilerini çek, sadece id ve username bilgisi gelsin
+    .populate("song", "title") // song alanının verilerini çek, sadece id ve title bilgisi gelsin
     .then((comments) => {
       res.status(200).json(comments);
     })
@@ -25,6 +27,8 @@ module.exports.GetByIdComment = async (req, res) => {
   }
 
   await Comment.findById(commentId)
+    .populate("user", "username") // user alanının verilerini çek, sadece id ve username bilgisi gelsin
+    .populate("song", "title") // song alanının verilerini çek, sadece id ve title bilgisi gelsin
     .then((comment) => {
       if (!comment) {
         return res.status(404).json("Comment not found!");
@@ -49,6 +53,7 @@ module.exports.InserComment = async (req, res) => {
   }
 
   const newComment = new Comment({
+    ...req.body,
     user: userId,
     song: songId,
   });
@@ -85,7 +90,7 @@ module.exports.UpdateComment = async (req, res) => {
 
   await Comment.findOneAndUpdate(
     { _id: commentId }, // Güncellenecek commentin ID'si
-    { user: userId, song: songId }, // Güncelleme verileri
+    { ...req.body, user: userId, song: songId }, // Güncelleme verileri
     { runValidators: true } // validation kontrollerinin yapılması için
   )
     .then((result) => {
