@@ -97,7 +97,7 @@ module.exports.DeleteCategory = async (req, res) => {
       }
       res
         .status(200)
-        .json(`${result._id} category with ID successfully deleted.`);
+        .json(`${result._id} Category with ID successfully deleted.`);
     })
     .catch((err) => {
       res.status(500).json(err);
