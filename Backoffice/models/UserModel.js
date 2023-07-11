@@ -60,6 +60,9 @@ const userSchema = mongoose.Schema({
         "The password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 symbol!",
     },
   },
+  image_url: {
+    type: String
+  },
   status: {
     type: Boolean
   },

@@ -48,6 +48,13 @@ module.exports.InsertUser = async (req, res) => {
   }
 
   const newUser = new User({ ...req.body, gender: genderId });
+
+  //Upload işlemi
+  if(req.file){
+    //Eğer dosya yüklendiyse, dosya yolunu image_url alanına ata
+    newUser.image_url = req.file.path;
+  }
+
   newUser
     .save()
     .then(() => {
@@ -73,6 +80,12 @@ module.exports.UpdateUser = async (req, res) => {
   const isValidGenderId = await Gender.exists({ _id: updatedUser.genderId });
   if (!isValidGenderId) {
     return res.status(400).json("Invalid Gender ID!");
+  }
+
+  //Upload işlemi
+  if(req.file){
+    //Eğer dosya yüklendiyse, dosya yolunu image_url alanına ata
+    updatedUser.image_url = req.file.path;
   }
 
   User.findOneAndUpdate(
