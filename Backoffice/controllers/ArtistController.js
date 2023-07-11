@@ -37,6 +37,13 @@ module.exports.GetByIdArtist = async (req, res) => {
 //!Insert
 module.exports.InsertArtist = async (req, res) => {
   const newArtist = new Artist(req.body);
+
+  //Upload işlemi
+  if(req.file){
+    //Eğer dosya yüklendiyse, dosya yolunu image_url alanına ata
+    newArtist.image_url = req.file.path;
+  }
+  
   await newArtist
     .save() //id bu sefer bodyden gelecek
     .then(() => {
@@ -53,6 +60,13 @@ module.exports.InsertArtist = async (req, res) => {
 module.exports.UpdateArtist = async (req, res) => {
   //id bu sefer bodyden gelecek
   const updatedArtist = req.body;
+
+  //Upload işlemi
+  if(req.file){
+    //Eğer dosya yüklendiyse, dosya yolunu image_url alanına ata
+    updatedArtist.image_url = req.file.path;
+  }
+
   //verilen id mongoose'un varsayılan id özelliklerine göre (ObjectId'ye göre) geçerlimi veya var mı
   //BU KOD YAPISINI HELPER METOTA AL TEKRARA DÜŞTÜ!!!!!! (alındı)
   const isValidId = CheckIsValidMongoID(updatedArtist.artistId);

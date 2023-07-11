@@ -28,6 +28,10 @@ ConnectDB(process.env.DB_CONNECTION_STRING, process.env.PORT, app);
 app.use(express.json());
 //tüm isteklere CORS yanıtlarını etkinleştirir yani tüm isteklerin izin verildiği anlamına gelir. (gelen isteklerin izinlerini kontrol etmek için.)
 app.use(cors());
+//static dosyaları programa tanıtmak ve çalıştırabilmek için middlewear
+app.use(express.static("public"));
+//upload için dosya yolu middleware'ini kullan
+app.use("/uploads", express.static("uploads"));
 
 
 //!routes
