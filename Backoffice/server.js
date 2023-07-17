@@ -14,6 +14,7 @@ const favoriteRoutes = require("./routes/FavoriteRoutes");
 const commentRoutes = require("./routes/CommentRoutes");
 const artistRoutes = require("./routes/ArtistRoutes");
 const songArtistRoutes = require("./routes/SongArtistRoutes");
+const authRoutes = require("./routes/AuthRoutes");
 
 
 const app = express();
@@ -46,3 +47,4 @@ app.use("/api/favorites", favoriteRoutes);
 app.use("/api/comments", commentRoutes);
 app.use("/api/artists", artistRoutes);
 app.use("/api/songartists", songArtistRoutes);
+app.use("/api/auth", authRoutes);
